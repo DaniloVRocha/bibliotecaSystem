@@ -1,0 +1,20 @@
+::ng-deep {
+    .mat-column-acoes {
+        max-width: 230px;
+        text-align: center;
+    }
+}
+
+.botao-emprestimo{
+    float:right;
+}
+
+.buscar-cliente{
+    margin-left: 10px;
+}
+
+.spinner{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

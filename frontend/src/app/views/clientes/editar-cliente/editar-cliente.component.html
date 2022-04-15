@@ -1,0 +1,57 @@
+<h1 mat-dialog-title>Editar Cliente</h1>
+
+<div mat-dialog-content>
+  <form class="editar-form" [formGroup]='formEditarCliente'>
+    <mat-form-field class="editar-full-width input-nome mt-3" appearance="fill">
+      <mat-label>Nome do cliente:</mat-label>
+      <input matInput  formControlName="nome">
+      <div *ngIf="this.formEditarCliente.controls['nome'].invalid && this.formEditarCliente.controls['nome'].touched">
+        <div [ngSwitch]="this.formEditarCliente.controls['nome'].errors !=null">
+          <span class="text-danger" *ngSwitchCase="this.formEditarCliente.controls['nome'].errors?.['required']">
+            O Campo Nome é Obrigatório<br>
+          </span>
+          <span class="text-danger"*ngSwitchCase="this.formEditarCliente.controls['nome'].errors?.['minlength'] != null">
+            Digite o Nome Completo do Cliente<br>
+          </span>
+          <span class="text-danger"*ngSwitchCase="this.formEditarCliente.controls['nome'].errors?.['maxlength'] != null ">
+            O nome não pode ter mais de 50 letras<br>
+          </span>
+        </div>
+      </div>
+    </mat-form-field>
+    <mat-form-field class="editar-full-width mt-3"  appearance="fill">
+      <mat-label>Email: </mat-label>
+      <input matInput formControlName="email">
+      <div *ngIf="this.formEditarCliente.controls['email'].invalid && this.formEditarCliente.controls['email'].touched">
+        <div [ngSwitch]="this.formEditarCliente.controls['email'].errors !=null">
+          <span class="text-danger" *ngSwitchCase="this.formEditarCliente.controls['email'].errors?.['required']">
+            O Campo Email é Obrigatório<br>
+          </span>
+          <span class="text-danger"*ngSwitchCase="this.formEditarCliente.controls['email'].errors?.['email'] != null">
+            Digite um Email Válido<br>
+          </span>
+        </div>
+      </div>
+    </mat-form-field>
+    <mat-form-field class="editar-full-width mt-3" appearance="fill">
+      <mat-label>Telefone: </mat-label>
+      <input matInput mask="(00) 00000-0000" formControlName="contato">
+      <div *ngIf="this.formEditarCliente.controls['contato'].invalid && this.formEditarCliente.controls['contato'].touched">
+        <div [ngSwitch]="this.formEditarCliente.controls['contato'].errors !=null">
+          <span class="text-danger" *ngSwitchCase="this.formEditarCliente.controls['contato'].errors?.['required']">
+            O Campo Telefone é Obrigatório<br>
+          </span>
+          <span class="text-danger"*ngSwitchCase="this.formEditarCliente.controls['contato'].errors?.['minlength'] != null">
+            Digite o Telefone com PreFixo<br>
+          </span>
+        </div>
+      </div>
+    </mat-form-field>
+  </form>
+  <button mat-raised-button color="primary" class= "button-gravar" (click)="editarCliente();"  [disabled]="!formEditarCliente.valid"[mat-dialog-close]="true">Gravar Cliente</button>
+</div>
+<div mat-dialog-actions>
+  <span class="text-danger" *ngIf="!formEditarCliente.valid">
+    Para liberar o botão, preencha os dados corretamente<br>
+  </span>
+</div>

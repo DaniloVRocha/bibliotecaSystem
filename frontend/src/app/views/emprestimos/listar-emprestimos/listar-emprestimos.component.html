@@ -1,0 +1,27 @@
+<div class="w-100 mb-3">
+  <mat-form-field appearance="fill">
+    <mat-select [(ngModel)]="selectedValue" (ngModelChange)="recarregaConteudo()">
+      <mat-option *ngFor="let option of options" [value]="option.value">
+        {{option.viewValue}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field *ngIf="this.selectedValue === 3" class="buscar-cliente" appearance="fill">
+    <mat-label>Pesquisa Cliente</mat-label>
+    <input matInput [(ngModel)]="buscaCliente" (ngModelChange)="buscarClientes();preencherTabelasPorCliente(this.clientes);" [matAutocomplete]="completeCliente">
+    <mat-autocomplete id="complete-cliente" #completeCliente="matAutocomplete">
+      <mat-option *ngFor="let cliente of clientes" [value]="cliente.nome">
+        {{cliente.nome}} - {{cliente.email}}
+      </mat-option>
+
+    </mat-autocomplete>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" [routerLink]="['/emprestimos/gravar']" class="botao-emprestimo">Realizar
+    Emprestimo</button>
+</div>
+<app-tabela-emprestimos *ngIf="mostrarTable" class="mt-10" [emprestimos]="emprestimos"></app-tabela-emprestimos>
+<div class="spinner"><mat-spinner *ngIf="!mostrarTable" ></mat-spinner></div>
+<div class="mt-5"><mat-card *ngIf="this.emprestimos.length === 0"><h1 class="text-center"> Não Existem Emprestimos para o Cenário Selecionado</h1></mat-card></div>
+

@@ -1,0 +1,41 @@
+<div class="w-100 mb-3">
+  <button mat-raised-button color="primary" (click)="openDialog()" class="">Novo Autor</button>
+</div>
+
+<mat-table [dataSource]="autores" class="mat-elevation-z8">
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+
+  <ng-container matColumnDef="nome">
+    <mat-header-cell *matHeaderCellDef> Nome </mat-header-cell>
+    <mat-cell *matCellDef="let row"> {{row.nome}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="email">
+    <mat-header-cell *matHeaderCellDef> E-mail </mat-header-cell>
+    <mat-cell *matCellDef="let row"> {{row.email}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="isni">
+    <mat-header-cell *matHeaderCellDef> ISNI </mat-header-cell>
+    <mat-cell *matCellDef="let row"> {{row.isni}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="dataNascimento">
+    <mat-header-cell *matHeaderCellDef> Data Nascimento </mat-header-cell>
+    <mat-cell *matCellDef="let row"> {{row.dataNascimento}} </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="biografia">
+    <mat-header-cell *matHeaderCellDef> Biografia </mat-header-cell>
+    <mat-cell *matCellDef="let row"> {{row.biografia}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="acoes">
+    <mat-header-cell *matHeaderCellDef style="width:180px"> Ações </mat-header-cell>
+    <mat-cell *matCellDef="let row" style="width:180px">
+      <button mat-raised-button color="accent" (click)="openDialogEditar(row.id)" class="me-2">Editar</button>
+      <button mat-raised-button color="warn" (click)="excluirAutor(row.id)" class="">Excluir</button>
+    </mat-cell>
+  </ng-container>
+</mat-table>

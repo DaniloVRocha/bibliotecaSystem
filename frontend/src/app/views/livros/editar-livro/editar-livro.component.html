@@ -1,0 +1,88 @@
+<h1 mat-dialog-title class="text-center">Editar Livro</h1>
+
+<div mat-dialog-content>
+  <form class="editar-form" [formGroup]='formEditarLivro'>
+    <mat-form-field class="editar-full-width input-nome mt-3" appearance="fill">
+      <mat-label>ISBN 13:</mat-label>
+      <input matInput [(ngModel)]="isbn" [ngModelOptions]="{standalone: true}">
+    </mat-form-field>
+
+    <button mat-raised-button class="botao-right" (click)="preencherDadosLivro()" color="primary">Preencher usando
+      ISBN</button>
+
+    <mat-form-field class="editar-full-width input-nome mt-3" appearance="fill">
+      <mat-label>Nome do Livro:</mat-label>
+      <input matInput formControlName="nome">
+      <div *ngIf="this.formEditarLivro.controls['nome'].invalid && this.formEditarLivro.controls['nome'].touched">
+        <div [ngSwitch]="this.formEditarLivro.controls['nome'].errors !=null">
+          <span class="text-danger" *ngSwitchCase="this.formEditarLivro.controls['nome'].errors?.['required']">
+            O Campo Nome é Obrigatório<br>
+          </span>
+          <span class="text-danger"
+            *ngSwitchCase="this.formEditarLivro.controls['nome'].errors?.['maxlength'] != null ">
+            O nome não pode ter mais de 50 letras<br>
+          </span>
+        </div>
+      </div>
+    </mat-form-field>
+
+    <mat-form-field class="editar-full-width mt-3" appearance="fill">
+      <mat-label>Ano de Publicação: </mat-label>
+      <input matInput mask="0000" formControlName="anoDePublicacao">
+      <div
+        *ngIf="this.formEditarLivro.controls['anoDePublicacao'].invalid && this.formEditarLivro.controls['anoDePublicacao'].touched">
+        <div [ngSwitch]="this.formEditarLivro.controls['anoDePublicacao'].errors !=null">
+          <span class="text-danger"
+            *ngSwitchCase="this.formEditarLivro.controls['anoDePublicacao'].errors?.['required']">
+            O Campo Ano de Publicação é Obrigatório<br>
+          </span>
+          <span class="text-danger"
+            *ngSwitchCase="this.formEditarLivro.controls['anoDePublicacao'].errors?.['maxlength'] != null ">
+            O Ano de Publicação não pode ter mais de 4 números<br>
+          </span>
+          <span class="text-danger"
+            *ngSwitchCase="this.formEditarLivro.controls['anoDePublicacao'].errors?.['minlength'] != null ">
+            O Ano de Publicação não pode ter menos de 4 números<br>
+          </span>
+        </div>
+      </div>
+    </mat-form-field>
+
+    <mat-form-field class="editar-full-width input-nome mt-3" appearance="fill">
+      <mat-label>Autor: </mat-label>
+      <mat-select name="autor" [(ngModel)]="autorSelecionado" [ngModelOptions]="{standalone: true}">
+        <mat-option *ngFor="let autor of autores" [value]="autor.id">
+          {{autor.isni}} - {{autor.nome}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="editar-full-width mt-3" appearance="fill">
+      <mat-label>Editora: </mat-label>
+      <input matInput formControlName="editora">
+      <div *ngIf="this.formEditarLivro.controls['editora'].invalid && this.formEditarLivro.controls['editora'].touched">
+        <div [ngSwitch]="this.formEditarLivro.controls['editora'].errors !=null">
+          <span class="text-danger" *ngSwitchCase="this.formEditarLivro.controls['editora'].errors?.['required']">
+            A Editora é Obrigatório<br>
+          </span>
+          <span class="text-danger"
+            *ngSwitchCase="this.formEditarLivro.controls['editora'].errors?.['maxlength'] != null ">
+            A Editora não pode ter mais de 50 letras<br>
+          </span>
+        </div>
+      </div>
+    </mat-form-field>
+
+    <mat-form-field class="editar-full-width mt-3" appearance="fill">
+      <mat-label>Quantidade De Exemplares: </mat-label>
+      <input matInput formControlName="quantidadeExemplares">
+    </mat-form-field>
+  </form>
+  <button mat-raised-button color="primary" class="botao-right" [disabled]="!formEditarLivro.valid"
+    (click)="editarLivro()" [mat-dialog-close]="true">Editar Livro</button>
+</div>
+<div mat-dialog-actions>
+  <span class="text-danger" *ngIf="!formEditarLivro.valid">
+    Para liberar o botão, preencha os dados corretamente<br>
+  </span>
+</div>

@@ -1,0 +1,47 @@
+<div class="w-100 mb-3">
+    <button mat-raised-button color="primary" (click)="openDialog()" class="">Novo Livro</button>
+  </div>
+  
+  <mat-table [dataSource]="livros" class="mat-elevation-z8">
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+  
+    <ng-container matColumnDef="nome">
+      <mat-header-cell *matHeaderCellDef> Nome </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.nome}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="isbn">
+        <mat-header-cell *matHeaderCellDef> ISBN </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.isbn}} </mat-cell>
+      </ng-container>
+  
+    <ng-container matColumnDef="autor">
+      <mat-header-cell *matHeaderCellDef> Autor </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.autor.nome}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="editora">
+        <mat-header-cell *matHeaderCellDef> Editora </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.editora}} </mat-cell>
+      </ng-container>
+
+    <ng-container matColumnDef="anoDePublicacao">
+      <mat-header-cell *matHeaderCellDef> Ano de Publicação </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.anoDePublicacao}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="quantidadeExemplares">
+        <mat-header-cell *matHeaderCellDef> Quantidede </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.quantidadeExemplares}} </mat-cell>
+    </ng-container>
+  
+    <ng-container matColumnDef="acoes">
+      <mat-header-cell *matHeaderCellDef style="width:180px"> Ações </mat-header-cell>
+      <mat-cell *matCellDef="let row" style="width:180px">
+        <button mat-raised-button color="accent" (click)="openDialogEditar(row.isbn)" class="me-2">Editar</button>
+        <button mat-raised-button color="warn" (click)="excluirLivro(row.isbn)" class="">Excluir</button>
+      </mat-cell>
+    </ng-container>
+  </mat-table>

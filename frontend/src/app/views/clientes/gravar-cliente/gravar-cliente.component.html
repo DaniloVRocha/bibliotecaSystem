@@ -1,0 +1,62 @@
+<h1 mat-dialog-title class="text-center">Cadastrar Novo Cliente</h1>
+
+<div mat-dialog-content>
+  <form class="gravar-form" [formGroup]='formGravarCliente'>
+    <mat-form-field class="gravar-full-width input-nome mt-3" appearance="fill">
+      <mat-label>Nome do cliente:</mat-label>
+      <input matInput formControlName="nome">
+      <div *ngIf="this.formGravarCliente.controls['nome'].invalid && this.formGravarCliente.controls['nome'].touched">
+        <div [ngSwitch]="this.formGravarCliente.controls['nome'].errors !=null">
+          <span class="text-danger" *ngSwitchCase="this.formGravarCliente.controls['nome'].errors?.['required']">
+            O Campo Nome é Obrigatório<br>
+          </span>
+          <span class="text-danger"
+            *ngSwitchCase="this.formGravarCliente.controls['nome'].errors?.['minlength'] != null">
+            Digite o Nome Completo do Cliente<br>
+          </span>
+          <span class="text-danger"
+            *ngSwitchCase="this.formGravarCliente.controls['nome'].errors?.['maxlength'] != null ">
+            O nome não pode ter mais de 50 letras<br>
+          </span>
+        </div>
+      </div>
+    </mat-form-field>
+    <mat-form-field class="gravar-full-width mt-3" appearance="fill">
+      <mat-label>Email: </mat-label>
+      <input matInput formControlName="email">
+      <div *ngIf="this.formGravarCliente.controls['email'].invalid && this.formGravarCliente.controls['email'].touched">
+        <div [ngSwitch]="this.formGravarCliente.controls['email'].errors !=null">
+          <span class="text-danger" *ngSwitchCase="this.formGravarCliente.controls['email'].errors?.['required']">
+            O Campo Email é Obrigatório<br>
+          </span>
+          <span class="text-danger" *ngSwitchCase="this.formGravarCliente.controls['email'].errors?.['email'] != null">
+            Digite um Email Válido<br>
+          </span>
+        </div>
+      </div>
+    </mat-form-field>
+    <mat-form-field class="gravar-full-width mt-3" appearance="fill">
+      <mat-label>Telefone: </mat-label>
+      <input matInput mask="(00) 00000-0000" formControlName="contato">
+      <div
+        *ngIf="this.formGravarCliente.controls['contato'].invalid && this.formGravarCliente.controls['contato'].touched">
+        <div [ngSwitch]="this.formGravarCliente.controls['contato'].errors !=null">
+          <span class="text-danger" *ngSwitchCase="this.formGravarCliente.controls['contato'].errors?.['required']">
+            O Campo Telefone é Obrigatório<br>
+          </span>
+          <span class="text-danger"
+            *ngSwitchCase="this.formGravarCliente.controls['contato'].errors?.['minlength'] != null">
+            Digite o Telefone com PreFixo<br>
+          </span>
+        </div>
+      </div>
+    </mat-form-field>
+  </form>
+  <button mat-raised-button color="primary" class="button-gravar" (click)="gravarCliente();"
+    [disabled]="!formGravarCliente.valid" [mat-dialog-close]="true">Gravar Cliente</button>
+</div>
+<div mat-dialog-actions>
+  <span class="text-danger" *ngIf="!formGravarCliente.valid">
+    Para liberar o botão, preencha os dados corretamente<br>
+  </span>
+</div>

@@ -1,0 +1,71 @@
+<h1 mat-dialog-title class="text-center">Cadastrar Novo Autor</h1>
+
+<div mat-dialog-content>
+  <form class="gravar-form" [formGroup]='formGravarAutor'>
+    <mat-form-field class="gravar-full-width input-nome mt-3" appearance="fill">
+      <mat-label>Nome do Autor:</mat-label>
+      <input matInput formControlName="nome">
+      <div *ngIf="this.formGravarAutor.controls['nome'].invalid && this.formGravarAutor.controls['nome'].touched">
+        <div [ngSwitch]="this.formGravarAutor.controls['nome'].errors !=null">
+          <span class="text-danger" *ngSwitchCase="this.formGravarAutor.controls['nome'].errors?.['required']">
+            O Campo Nome é Obrigatório<br>
+          </span>
+          <span class="text-danger" *ngSwitchCase="this.formGravarAutor.controls['nome'].errors?.['minlength'] != null">
+            Digite o Nome Completo do Autor<br>
+          </span>
+          <span class="text-danger"
+            *ngSwitchCase="this.formGravarAutor.controls['nome'].errors?.['maxlength'] != null ">
+            O nome não pode ter mais de 50 letras<br>
+          </span>
+        </div>
+      </div>
+    </mat-form-field>
+    <mat-form-field class="gravar-full-width mt-3" appearance="fill">
+      <mat-label>Email: </mat-label>
+      <input matInput formControlName="email">
+      <div *ngIf="this.formGravarAutor.controls['email'].invalid && this.formGravarAutor.controls['email'].touched">
+        <div [ngSwitch]="this.formGravarAutor.controls['email'].errors !=null">
+          <span class="text-danger" *ngSwitchCase="this.formGravarAutor.controls['email'].errors?.['required']">
+            O Campo Email é Obrigatório<br>
+          </span>
+          <span class="text-danger" *ngSwitchCase="this.formGravarAutor.controls['email'].errors?.['email'] != null">
+            Digite um Email Válido<br>
+          </span>
+        </div>
+      </div>
+    </mat-form-field>
+    <mat-form-field class="gravar-full-width mt-3" appearance="fill">
+      <mat-label>ISNI: </mat-label>
+      <input matInput formControlName="isni">
+      <div *ngIf="this.formGravarAutor.controls['isni'].invalid && this.formGravarAutor.controls['isni'].touched">
+        <div [ngSwitch]="this.formGravarAutor.controls['isni'].errors !=null">
+          <span class="text-danger" *ngSwitchCase="this.formGravarAutor.controls['isni'].errors?.['required']">
+            O Campo ISNI é Obrigatório<br>
+          </span>
+          <span class="text-danger" *ngSwitchCase="this.formGravarAutor.controls['isni'].errors?.['minlength'] != null">
+            Digite o ISNI completo<br>
+          </span>
+        </div>
+      </div>
+    </mat-form-field>
+    <mat-form-field class="gravar-full-width mt-3" appearance="fill">
+      <mat-label>Biografia: </mat-label>
+      <textarea matInput formControlName="biografia"></textarea>
+    </mat-form-field>
+
+    <mat-form-field class="gravar-full-width" appearance="fill">
+      <mat-label>Data de Nascimento</mat-label>
+      <input matInput formControlName="dataNascimento" [max]="maxDate" [matDatepicker]="picker">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+  </form>
+  <button mat-raised-button color="primary" class="button-gravar" (click)="gravarAutor();"
+    [disabled]="!formGravarAutor.valid" [mat-dialog-close]="true">Gravar Autor</button>
+</div>
+<div mat-dialog-actions>
+  <span class="text-danger" *ngIf="!formGravarAutor.valid">
+    Para liberar o botão, preencha os dados corretamente<br>
+  </span>
+</div>

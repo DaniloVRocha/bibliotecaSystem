@@ -1,0 +1,43 @@
+<mat-table [dataSource]="emprestimos" class="mat-elevation-z8">
+    <!-- Header and Row Declarations -->
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+  
+    <!-- User name Definition -->
+    <ng-container matColumnDef="nomeCliente">
+      <mat-header-cell *matHeaderCellDef> Nome Cliente </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.cliente.nome}} </mat-cell>
+    </ng-container>
+  
+    <ng-container matColumnDef="isbn">
+        <mat-header-cell *matHeaderCellDef> ISBN Livro </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.livro.isbn}} </mat-cell>
+      </ng-container>
+
+    <ng-container matColumnDef="nomeLivro">
+      <mat-header-cell *matHeaderCellDef> Nome Livro </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.livro.nome}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="dataInicio">
+        <mat-header-cell *matHeaderCellDef> Data de Saida </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.dataInicio}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="contato">
+        <mat-header-cell *matHeaderCellDef> Contato do Cliente </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.cliente.contato | mask: '(00) 00000-0000'}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="entregue">
+        <mat-header-cell *matHeaderCellDef> Entregue </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.dataEntrega}} </mat-cell>
+    </ng-container>
+  
+    <ng-container matColumnDef="acoes">
+      <mat-header-cell *matHeaderCellDef style="width:250px"> Ações </mat-header-cell>
+      <mat-cell *matCellDef="let row" style="width:250px">
+        <button mat-raised-button color="warn" *ngIf="row.dataEntrega === null || row.dataEntrega === undefined" (click) = "devolverLivro(row.id)" class="">Devolver</button>
+      </mat-cell>
+    </ng-container>
+  </mat-table>

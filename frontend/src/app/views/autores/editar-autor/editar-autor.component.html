@@ -1,0 +1,72 @@
+<h1 mat-dialog-title class="text-center">Editar Autor</h1>
+
+<div mat-dialog-content>
+  <form class="editar-form" [formGroup]='formEditarAutor'>
+    <mat-form-field class="editar-full-width input-nome mt-3" appearance="fill">
+      <mat-label>Nome do Autor:</mat-label>
+      <input matInput formControlName="nome">
+      <div *ngIf="this.formEditarAutor.controls['nome'].invalid && this.formEditarAutor.controls['nome'].touched">
+        <div [ngSwitch]="this.formEditarAutor.controls['nome'].errors !=null">
+          <span class="text-danger" *ngSwitchCase="this.formEditarAutor.controls['nome'].errors?.['required']">
+            O Campo Nome é Obrigatório<br>
+          </span>
+          <span class="text-danger" *ngSwitchCase="this.formEditarAutor.controls['nome'].errors?.['minlength'] != null">
+            Digite o Nome Completo do Autor<br>
+          </span>
+          <span class="text-danger"
+            *ngSwitchCase="this.formEditarAutor.controls['nome'].errors?.['maxlength'] != null ">
+            O nome não pode ter mais de 50 letras<br>
+          </span>
+        </div>
+      </div>
+    </mat-form-field>
+    <mat-form-field class="editar-full-width mt-3" appearance="fill">
+      <mat-label>Email: </mat-label>
+      <input matInput formControlName="email">
+      <div *ngIf="this.formEditarAutor.controls['email'].invalid && this.formEditarAutor.controls['email'].touched">
+        <div [ngSwitch]="this.formEditarAutor.controls['email'].errors !=null">
+          <span class="text-danger" *ngSwitchCase="this.formEditarAutor.controls['email'].errors?.['required']">
+            O Campo Email é Obrigatório<br>
+          </span>
+          <span class="text-danger" *ngSwitchCase="this.formEditarAutor.controls['email'].errors?.['email'] != null">
+            Digite um Email Válido<br>
+          </span>
+        </div>
+      </div>
+    </mat-form-field>
+    <mat-form-field class="editar-full-width mt-3" appearance="fill">
+      <mat-label>ISNI: </mat-label>
+      <input matInput formControlName="isni">
+      <div *ngIf="this.formEditarAutor.controls['isni'].invalid && this.formEditarAutor.controls['isni'].touched">
+        <div [ngSwitch]="this.formEditarAutor.controls['isni'].errors !=null">
+          <span class="text-danger" *ngSwitchCase="this.formEditarAutor.controls['isni'].errors?.['required']">
+            O Campo ISNI é Obrigatório<br>
+          </span>
+          <span class="text-danger" *ngSwitchCase="this.formEditarAutor.controls['isni'].errors?.['minlength'] != null">
+            Digite o ISNI completo<br>
+          </span>
+        </div>
+      </div>
+    </mat-form-field>
+    <mat-form-field class="editar-full-width mt-3" appearance="fill">
+      <mat-label>Biografia: </mat-label>
+      <textarea matInput formControlName="biografia"></textarea>
+    </mat-form-field>
+
+
+    <mat-form-field class="editar-full-width" appearance="fill">
+      <mat-label>Data de Nascimento</mat-label>
+      <input matInput formControlName="dataNascimento" [max]="maxDate" [matDatepicker]="picker">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+  </form>
+  <button mat-raised-button color="primary" class="button-gravar" (click)="editarAutor();"
+    [disabled]="!formEditarAutor.valid" [mat-dialog-close]="true">Editar Autor</button>
+</div>
+<div mat-dialog-actions>
+  <span class="text-danger" *ngIf="!formEditarAutor.valid">
+    Para liberar o botão, preencha os dados corretamente<br>
+  </span>
+</div>

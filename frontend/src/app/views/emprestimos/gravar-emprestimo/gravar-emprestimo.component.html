@@ -1,0 +1,77 @@
+<mat-card>
+    <h1 class="text-center">Novo Emprestimo de Livro</h1>
+</mat-card>
+<div class="row">
+    <div class="col-6 mt-5">
+
+        <!-- Input Busca de Clientes -->
+        <mat-form-field class="gravar-full-width" appearance="fill">
+            <mat-label>Pesquisa Cliente</mat-label>
+            <input matInput [(ngModel)]="buscaCliente" (ngModelChange)="buscarClientes();preencherCamposCliente(this.clientes);" [matAutocomplete]="completeCliente">
+            <mat-autocomplete id="complete-cliente" #completeCliente="matAutocomplete">
+              <mat-option *ngFor="let cliente of clientes" [value]="cliente.nome">
+                {{cliente.nome}} - {{cliente.email}}
+              </mat-option>
+
+            </mat-autocomplete>
+        </mat-form-field>
+
+  
+        <form class="gravar-form" [formGroup]='formGravarCliente'>
+            <mat-form-field class="gravar-full-width" appearance="fill">
+                <mat-label>Nome: </mat-label>
+                <input matInput [disabled] = "disabled" formControlName="nome">
+            </mat-form-field>
+            <mat-form-field class="gravar-full-width" appearance="fill">
+                <mat-label>Email: </mat-label>
+                <input matInput [disabled] = "disabled" formControlName="email">
+            </mat-form-field>
+            <mat-form-field class="gravar-full-width" appearance="fill">
+                <mat-label>Contato: </mat-label>
+                <input matInput mask="(99) 99999-9999" [disabled] = "disabled" formControlName="contato">
+            </mat-form-field>
+        </form>
+    </div>
+    
+
+    <div class="col-6 mt-5">
+
+        <!-- Input Busca de Clientes -->
+        <mat-form-field class="gravar-full-width" appearance="fill">
+            <mat-label>Pesquisa Livro</mat-label>
+            <input matInput [(ngModel)]="buscaLivro" (ngModelChange)="buscarLivros();preencherCamposLivro(this.livros);" [matAutocomplete]="completeLivro">
+            <mat-autocomplete id="" #completeLivro="matAutocomplete">
+              <mat-option *ngFor="let livro of livros" [value]="livro.nome">
+                {{livro.isbn}} - {{livro.nome}}
+              </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+
+        <!-- Form Livros Preencher -->
+        <form class="gravar-form" [formGroup]='formGravarLivro'>
+            <mat-form-field class="gravar-full-width" appearance="fill">
+                <mat-label>ISBN: </mat-label>
+                <input matInput [disabled] = "disabled" formControlName="isbn">
+            </mat-form-field>
+            <mat-form-field class="gravar-full-width" appearance="fill">
+                <mat-label>Nome: </mat-label>
+                <input matInput [disabled] = "disabled" formControlName="nome">
+            </mat-form-field>
+            <mat-form-field class="gravar-full-width" appearance="fill">
+                <mat-label>Editora: </mat-label>
+                <input matInput  [disabled] = "disabled" formControlName="editora">
+            </mat-form-field>
+        </form>
+                    
+    </div>
+
+
+    <button mat-raised-button (click)="realizarEmprestimo()" [disabled]="!liberaLivro || !liberaCliente" color="accent">Efetuar Emprestimo</button>
+    
+
+</div>
+
+
+
+
+   
