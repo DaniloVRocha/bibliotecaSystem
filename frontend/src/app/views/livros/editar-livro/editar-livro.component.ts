@@ -76,7 +76,7 @@ export class EditarLivroComponent implements OnInit {
         var openAPI: OpenLibrary = Object.values(res)[0].details;
         let dataCriacao = new Date(Object.values(res)[0].details.publish_date).getFullYear();
         this.formEditarLivro = new FormGroup({
-          nome: new FormControl(openAPI.full_title, Validators.compose([Validators.required, Validators.maxLength(50)])),
+          nome: new FormControl(openAPI.title, Validators.compose([Validators.required, Validators.maxLength(50)])),
           anoDePublicacao: new FormControl(dataCriacao, Validators.compose([Validators.required, Validators.minLength(4), Validators.minLength(4)])),
           editora: new FormControl(openAPI.publishers[0], Validators.compose([Validators.required, Validators.maxLength(50)])),
           quantidadeExemplares: new FormControl(openAPI.number_of_pages),

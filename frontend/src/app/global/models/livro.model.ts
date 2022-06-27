@@ -8,4 +8,5 @@ export default interface Livro {
     anoDePublicacao?:string;
     editora?:string;
     quantidadeExemplares?:number;
+    imagemUrl?:string;
 }

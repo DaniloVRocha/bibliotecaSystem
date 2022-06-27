@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MessagemService } from 'src/app/core/services/messagem.service';
-import OpenApi from 'src/app/global/constant/openapi-library.constant';
 import Autor from 'src/app/global/models/autor.model';
 import Livro from 'src/app/global/models/livro.model';
 import OpenLibrary from 'src/app/global/models/openlibrary.model';
@@ -20,12 +19,14 @@ export class GravarLivroComponent implements OnInit {
     anoDePublicacao: new FormControl('', Validators.compose([Validators.required,Validators.minLength(4),Validators.minLength(4)])),
     editora: new FormControl('', Validators.compose([Validators.required,Validators.maxLength(50)])),
     quantidadeExemplares: new FormControl(''),
+    imagemUrl: new FormControl('')
   });
 
 
   isbn:string = "";
   autores: Autor[] = [];
   autorSelecionado: number = 0;
+  thumb_url:string = "sem-imagem.png";
   
 
   constructor(private livroApi:LivrosService,
@@ -64,13 +65,16 @@ export class GravarLivroComponent implements OnInit {
       if(Object.keys(res).length === 0 ) {
         this.messageService.error("Número de ISBN Ínvalido.")
       }else{
-        var openAPI:OpenLibrary=  Object.values(res)[0].details;
+        var openAPI:OpenLibrary=Object.values(res)[0].details;
+        openAPI.thumbnail_url = Object.values(res)[0].thumbnail_url;
+        console.log(Object.values(res)[0].thumbnail_url)
         let dataCriacao = new Date(Object.values(res)[0].details.publish_date).getFullYear();
         this.formGravarLivro = new FormGroup({
-          nome: new FormControl(openAPI.full_title, Validators.compose([Validators.required,Validators.maxLength(50)])),
+          nome: new FormControl(openAPI.title, Validators.compose([Validators.required,Validators.maxLength(50)])),
           anoDePublicacao: new FormControl(dataCriacao, Validators.compose([Validators.required,Validators.minLength(4),Validators.minLength(4)])),
           editora: new FormControl(openAPI.publishers[0], Validators.compose([Validators.required,Validators.maxLength(50)])),
           quantidadeExemplares: new FormControl(openAPI.number_of_pages),
+          imagemUrl: new FormControl(openAPI.thumbnail_url.replace("-S.jpg", "-M.jpg"))
         });
       }
     })

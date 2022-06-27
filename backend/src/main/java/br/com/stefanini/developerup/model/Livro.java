@@ -26,6 +26,9 @@ public class Livro extends PanacheEntityBase{
 	
 	@Column(name="ano_publicacao")
 	private String anoDePublicacao;
+
+	@Column(name="imagemUrl")
+	private String imagemUrl;
 	
 	@Column(name="editora", length=50)
 	private String editora;
@@ -80,5 +83,13 @@ public class Livro extends PanacheEntityBase{
 
 	public void setQuantidadeExemplares(Integer quantidadeExemplares) {
 		this.quantidadeExemplares = quantidadeExemplares;
+	}
+
+	public String getImagemUrl() {
+		return imagemUrl;
+	}
+
+	public void setImagemUrl(String imagemUrl) {
+		this.imagemUrl = imagemUrl;
 	}
 }

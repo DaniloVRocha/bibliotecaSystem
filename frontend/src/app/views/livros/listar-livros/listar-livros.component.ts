@@ -14,7 +14,6 @@ import { LivrosService } from '../livros.service';
 export class ListarLivrosComponent implements OnInit {
 
   livros:Livro[] = [];
-  displayedColumns = ['nome', 'isbn','autor','anoDePublicacao','editora','quantidadeExemplares', 'acoes'];
 
   constructor(private livroApi:LivrosService,
               public dialog: MatDialog,

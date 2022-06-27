@@ -18,7 +18,7 @@ import br.com.stefanini.developerup.service.exceptions.NotFoundException;
 public class LivroService {
     @Inject
     LivroDao dao;
-    
+
 	public Livro listarPorIsnb(String isnb) throws NotFoundException {
 			Livro livro = dao.listarPorIsbn(isnb);
 			if(livro == null) {

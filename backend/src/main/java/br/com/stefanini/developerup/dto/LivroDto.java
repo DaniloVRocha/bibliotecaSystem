@@ -16,6 +16,8 @@ public class LivroDto {
 
 	private Integer quantidadeExemplares;
 
+	private String imagemUrl;
+
 	public String getIsbn() {
 		return isbn;
 	}
@@ -64,4 +66,11 @@ public class LivroDto {
 		this.quantidadeExemplares = quantidadeExemplares;
 	}
 
+	public String getImagemUrl() {
+		return imagemUrl;
+	}
+
+	public void setImagemUrl(String imagemUrl) {
+		this.imagemUrl = imagemUrl;
+	}
 }

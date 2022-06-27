@@ -17,6 +17,7 @@ public class LivroParser {
     	dto.setEditora(entidade.getEditora());
     	dto.setAnoDePublicacao(entidade.getAnoDePublicacao());
     	dto.setAutor(entidade.getAutor());
+		dto.setImagemUrl(entidade.getImagemUrl());
         
         return dto;
     }

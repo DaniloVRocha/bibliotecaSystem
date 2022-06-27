@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import ApiUrl from 'src/app/global/constant/api-urls.constant';
-import OpenApi from 'src/app/global/constant/openapi-library.constant';
 import Livro from 'src/app/global/models/livro.model';
 import OpenLibrary from 'src/app/global/models/openlibrary.model';
 
@@ -13,9 +12,8 @@ export class LivrosService {
 
   constructor(private http: HttpClient) { }
 
-  //OpenApi Library
   verificarIsnb(isnb:String){
-    return this.http.get<OpenLibrary>(`${OpenApi.livros}?bibkeys=ISBN:${isnb}&jscmd=details&format=json`)
+    return this.http.get<OpenLibrary>(`${ApiUrl.livros}/detalhes?bibkeys=${isnb}`)
   }
 
   //Crud Livros
