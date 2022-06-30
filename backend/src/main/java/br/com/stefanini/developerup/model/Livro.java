@@ -27,7 +27,7 @@ public class Livro extends PanacheEntityBase{
 	@Column(name="ano_publicacao")
 	private String anoDePublicacao;
 
-	@Column(name="imagemUrl")
+	@Column(name="imagem")
 	private String imagemUrl;
 	
 	@Column(name="editora", length=50)
