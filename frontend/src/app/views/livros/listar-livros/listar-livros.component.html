@@ -2,8 +2,8 @@
   <button mat-raised-button color="primary" (click)="openDialog()" class="">Novo Livro</button>
 </div>
 
-<div class="row">
-  <div class="col-4 mt-4" *ngFor='let livro of livros'>
+<div class="row mb-5 container">
+  <div class="col-md-4 mt-5" *ngFor='let livro of livros'>
     <mat-card>
       <mat-card-title-group>
         <mat-card-title>{{livro.nome}}</mat-card-title>
